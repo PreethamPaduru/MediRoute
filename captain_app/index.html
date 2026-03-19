@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Medi-Route Captain</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols Standard -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="images/logo.png" />
+
+   <!-- Google Maps API -->
+<script 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCi0StTO8sInvWRLm4v0urPUkoK7x0XFY&libraries=places&callback=onGoogleMapsLoaded" 
+  async defer>
+</script>
+
+</head>
+
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <section id="screen-splash" class="screen active splash-bg">
+        <div class="splash-content">
+            <div class="logo-wrapper">
+                <img src="images/logo.png" class="splash-logo" />
+            </div>
+            <h1>Medi-Route Captain</h1>
+            <p>Emergency Response • Smart Navigation</p>
+            <div class="splash-loader"></div>
+        </div>
+    </section>
+
+    <!-- LOGIN SCREEN -->
+    <section id="screen-login" class="screen bg-light center-flex">
+        <div class="login-card fade-in-up">
+            <div class="login-header">
+                <div class="icon-circle bg-green-light">
+                    <span class="material-symbols-rounded text-green">ambulance</span>
+                </div>
+                <h2>Captain Login</h2>
+                <p>Enter details to continue</p>
+            </div>
+
+            <div class="field-group">
+                <label>Full Name</label>
+                <div class="input-wrapper">
+                    <span class="material-symbols-rounded input-icon">person</span>
+                    <input id="cap-name" type="text" placeholder="Enter Your Name" />
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label>Mobile Number</label>
+                <div class="input-wrapper">
+                    <span class="material-symbols-rounded input-icon">smartphone</span>
+                    <input id="cap-mobile" type="tel" placeholder="Mobile Number" />
+                </div>
+            </div>
+
+            <button id="btn-login" class="btn primary-btn full-width">Continue</button>
+            <p style="text-align:center;margin-top:12px;color:#666;font-size:14px">New here? <a href="#" id="cap-link-signup">Create an account</a></p>
+        </div>
+    </section>
+
+    <!-- SIGNUP MODAL -->
+    <div id="cap-modal-signup" class="modal-overlay" style="display:none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Captain Sign Up</h3>
+          <button id="cap-close-signup" class="icon-btn-sm"><span class="material-symbols-rounded">close</span></button>
+        </div>
+        <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+          <h4 style="margin-top: 10px; margin-bottom: 12px; font-weight: 600;">Personal Details</h4>
+          <div class="field-group">
+            <label>Full Name</label>
+            <div class="input-wrapper">
+              <input id="cap-sign-name" type="text" placeholder="Full name" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Mobile Number</label>
+            <div class="input-wrapper">
+              <input id="cap-sign-mobile" type="tel" placeholder="Mobile number" />
+            </div>
+          </div>
+
+          <h4 style="margin-top: 16px; margin-bottom: 12px; font-weight: 600;">License Details</h4>
+          <div class="field-group">
+            <label>License Number</label>
+            <div class="input-wrapper">
+              <input id="cap-license-num" type="text" placeholder="License number" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>License Expiry Date</label>
+            <div class="input-wrapper">
+              <input id="cap-license-exp" type="date" />
+            </div>
+          </div>
+
+          <h4 style="margin-top: 16px; margin-bottom: 12px; font-weight: 600;">Ambulance Details</h4>
+          <div class="field-group">
+            <label>Ambulance Number</label>
+            <div class="input-wrapper">
+              <input id="cap-amb-num" type="text" placeholder="e.g. AP 39 AB 1234" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Ambulance Type</label>
+            <div class="select-wrapper">
+              <select id="cap-amb-type">
+                <option value="">Select Type</option>
+                <option value="BLS">BLS Ambulance</option>
+                <option value="ALS">ALS Ambulance</option>
+                <option value="MICU">MICU Ambulance</option>
+              </select>
+              <span class="material-symbols-rounded arrow-icon">expand_more</span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Ambulance Model</label>
+            <div class="input-wrapper">
+              <input id="cap-amb-model" type="text" placeholder="e.g. Force Traveller" />
+            </div>
+          </div>
+
+          <h4 style="margin-top: 16px; margin-bottom: 12px; font-weight: 600;">Insurance Details</h4>
+          <div class="field-group">
+            <label>Insurance Number</label>
+            <div class="input-wrapper">
+              <input id="cap-insurance-num" type="text" placeholder="Insurance policy number" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Insurance Expiry Date</label>
+            <div class="input-wrapper">
+              <input id="cap-insurance-exp" type="date" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Password</label>
+            <div class="input-wrapper">
+              <input id="cap-sign-password" type="password" placeholder="Choose a password" />
+            </div>
+          </div>
+          <button id="cap-btn-signup" class="btn primary-btn full-width">Create Account</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERIFICATION SCREEN -->
+    <section id="screen-verify" class="screen bg-gray">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="app-title">Verification</div>
+            </div>
+        </header>
+
+        <div class="scroll-container">
+            <div class="login-card no-shadow bg-white mt-3">
+                <h2 class="section-title">Ambulance Details</h2>
+
+                <div class="field-group">
+                    <label>Ambulance Number</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-rounded input-icon">directions_car</span>
+                        <input id="amb-number" type="text" placeholder="AP 39..." />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Model / Type</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-rounded input-icon">local_shipping</span>
+                        <input id="amb-model" type="text" placeholder="e.g. Force Traveller" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Ambulance Type</label>
+                    <div class="select-wrapper">
+                        <span class="material-symbols-rounded input-icon">category</span>
+                        <select id="amb-type">
+                            <option value="BLS">BLS Ambulance</option>
+                            <option value="ALS">ALS Ambulance</option>
+                            <option value="MICU">MICU Ambulance</option>
+                        </select>
+                        <span class="material-symbols-rounded arrow-icon">expand_more</span>
+                    </div>
+                </div>
+
+                <h2 class="section-title mt-3">Documents</h2>
+
+                <div class="upload-box">
+                    <label class="label">Side Profile Photo</label>
+                    <div class="file-input-wrapper">
+                        <span class="material-symbols-rounded">upload_file</span>
+                        <span>Upload Photo</span>
+                        <input type="file" id="cap-photo" />
+                    </div>
+                </div>
+
+                <div class="upload-box">
+                    <label class="label">Ambulance Photo</label>
+                    <div class="file-input-wrapper">
+                        <span class="material-symbols-rounded">add_a_photo</span>
+                        <span>Upload Photo</span>
+                        <input type="file" id="amb-photo" />
+                    </div>
+                </div>
+
+                <button id="btn-verify" class="btn primary-btn full-width mt-3">Submit & Proceed</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOME + MAP -->
+    <section id="screen-home" class="screen">
+        <div id="map" class="map-container"></div>
+
+        <!-- BOTTOM SHEET -->
+        <div id="bottom-sheet" class="bottom-sheet">
+            <div class="sheet-handle"></div>
+
+            <div class="captain-status-bar">
+                <div class="cap-info">
+                    <img src="images/logo.png" class="cap-photo-sm" alt="Captain" />
+                    <div>
+                        <h3 id="cap-display-name" class="cap-name">Captain</h3>
+                        <p id="cap-display-amb" class="cap-sub">Verified</p>
+                    </div>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="toggle-online">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="sheet-content mt-3" id="sheet-scroll">
+                <div class="section-header">
+                    <span>Green Corridor Signals</span>
+                    <span class="material-symbols-rounded">traffic</span>
+                </div>
+                <div id="signal-list" class="signal-scroller"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REQUEST POPUP -->
+    <div id="req-popup" class="popup-modal hidden">
+        <div class="popup-icon-wrapper">
+            <span class="material-symbols-rounded">emergency_share</span>
+        </div>
+        <h2>Emergency Request</h2>
+        <p id="req-text">Incoming emergency ride...</p>
+
+        <div class="popup-actions">
+            <button id="btn-accept" class="btn primary-btn full-width icon-left">
+                <span class="material-symbols-rounded">check</span> Accept
+            </button>
+            <button id="btn-reject" class="btn danger-outline-btn full-width icon-left">
+                <span class="material-symbols-rounded">close</span> Reject
+            </button>
+        </div>
+    </div>
+
+    <script src="js/captain.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medi-Route • AI Traffic Control Engine</title>
+
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+ <!-- Google Maps API -->
+<script 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCmb7BCrLFXsDQgLWhfYBPN2VQ9w0-V9o&callback=onGoogleMapsLoaded" 
+  async defer>
+</script>
+<script src="js/engine.js"></script>
+
+    
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <img src="images/logo.png" class="header-logo">
+    <div class="title-block">
+        <h2>Medi-Route Traffic AI Engine</h2>
+        <p>Real-Time Signal Control • Green Corridor • Smart Routing</p>
+    </div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- MAP -->
+    <div id="map"></div>
+
+    <!-- RIGHT CONTROL PANEL -->
+    <div class="panel glass">
+        <h3>Signal Control Room</h3>
+
+        <div id="signal-list" class="signal-list"></div>
+
+        <h3 style="margin-top:18px;">Ambulance Status</h3>
+        <div class="status-box">
+            <p><b>Ambulance:</b> <span id="amb-id">--</span></p>
+            <p><b>Current Road:</b> <span id="amb-road">--</span></p>
+            <p><b>Next Signal:</b> <span id="next-signal">--</span></p>
+            <p><b>ETA:</b> <span id="amb-eta">--</span></p>
+        </div>
+
+        <button id="btn-start-corridor" class="btn-primary full">Activate Green Corridor</button>
+    </div>
+
+</div>
+
+<script src="js/engine.js"></script>
+</body>
+</html>

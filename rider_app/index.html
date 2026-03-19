@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Medi-Route | Rider App</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols Standard -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <!-- Google Maps API -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCmb7BCrLFXsDQgLWhfYBPN2VQ9w0-V9o&libraries=places&callback=onGoogleMapsLoaded"
+    async defer>
+    </script>
+
+</head>
+
+<body>
+
+  <!-- Splash Screen -->
+  <div id="screen-splash" class="screen active splash-bg">
+    <div class="splash-content">
+      <div class="logo-wrapper">
+        <img src="images/logo.png" class="splash-logo" alt="Medi-Route" />
+      </div>
+      <h1>Medi-Route</h1>
+      <p>Smart Emergency Routing with Green Corridor</p>
+      <div class="splash-loader"></div>
+    </div>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="screen-login" class="screen bg-light center-flex">
+    <div class="login-card fade-in-up">
+      <div class="login-header">
+        <div class="icon-circle bg-green-light">
+          <span class="material-symbols-rounded text-green">medical_services</span>
+        </div>
+        <h2>Welcome</h2>
+        <p>Sign in to book emergency ambulances</p>
+      </div>
+
+      <div class="field-group">
+        <label>Full Name</label>
+        <div class="input-wrapper">
+          <span class="material-symbols-rounded input-icon">person</span>
+          <input id="login-name" type="text" placeholder="Enter your name" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Mobile Number</label>
+        <div class="input-wrapper">
+          <span class="material-symbols-rounded input-icon">smartphone</span>
+          <input id="login-mobile" type="tel" placeholder="Enter mobile number" />
+        </div>
+      </div>
+
+      <button id="btn-login-continue" class="btn primary-btn full-width">
+        Continue
+      </button>
+      <p style="text-align:center;margin-top:12px;color:#666;font-size:14px">New here? <a href="#"
+          id="link-signup">Create an account</a></p>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="modal-signup" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Create Patient Account</h3>
+        <button id="btn-close-signup" class="icon-btn-sm"><span class="material-symbols-rounded">close</span></button>
+      </div>
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        <div class="field-group">
+          <label>Full Name</label>
+          <div class="input-wrapper">
+            <input id="signup-name" type="text" placeholder="Enter your name" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Mobile Number</label>
+          <div class="input-wrapper">
+            <input id="signup-mobile" type="tel" placeholder="Mobile number" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Age</label>
+          <div class="input-wrapper">
+            <input id="signup-age" type="number" placeholder="Age" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Blood Group</label>
+          <div class="select-wrapper">
+            <select id="signup-blood">
+              <option value="">Select Blood Group</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+            <span class="material-symbols-rounded arrow-icon">expand_more</span>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Emergency Contact</label>
+          <div class="input-wrapper">
+            <input id="signup-emergency" type="tel" placeholder="Emergency contact number" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Medical History</label>
+          <div class="input-wrapper">
+            <textarea id="signup-medical" placeholder="Any allergies or medical conditions"
+              style="padding: 8px; border-radius: 8px; border: 1px solid #ddd; min-height: 60px;"></textarea>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <input id="signup-password" type="password" placeholder="Choose a password" />
+          </div>
+        </div>
+        <button id="btn-signup" class="btn primary-btn full-width">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Screen -->
+  <div id="screen-home" class="screen">
+    <header class="app-header">
+      <div class="header-left">
+        <img src="images/logo.png" class="header-logo" alt="Logo" />
+        <div class="header-text">
+          <div class="app-title">Medi-Route</div>
+          <div class="app-subtitle">Emergency Booking</div>
+        </div>
+      </div>
+      <button id="btn-profile" class="icon-btn">
+        <span class="material-symbols-rounded">person</span>
+      </button>
+    </header>
+
+    <div id="home-map" class="map-container"></div>
+
+    <div class="bottom-sheet">
+      <div class="sheet-handle"></div>
+
+      <div class="location-box">
+        <div class="location-row">
+          <span class="material-symbols-rounded text-green loc-icon">my_location</span>
+          <div class="field-content">
+            <label>Pickup Location</label>
+            <input id="pickup-input" type="text" placeholder="Tap 'Use Current Location'" readonly />
+          </div>
+        </div>
+        <button id="btn-use-location" class="btn text-btn">Use Current Location</button>
+      </div>
+
+      <div class="field-group mt-2">
+        <label>Select Hospital</label>
+        <div class="select-wrapper">
+          <span class="material-symbols-rounded input-icon">local_hospital</span>
+          <select id="hospital-select"></select>
+          <span class="material-symbols-rounded arrow-icon">expand_more</span>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="material-symbols-rounded text-gray">schedule</span>
+          <div>
+            <small>Approx Time</small>
+            <div id="home-time" class="stat-value">--</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <span class="material-symbols-rounded text-gray">currency_rupee</span>
+          <div>
+            <small>Approx Fare</small>
+            <div id="home-fare" class="stat-value">--</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="btn-ride-options" class="btn primary-btn full-width icon-left">
+          <span class="material-symbols-rounded">ambulance</span>
+          View Ambulance Options
+        </button>
+        <button id="btn-voice-emergency" class="btn danger-outline-btn full-width icon-left mt-2">
+          <span class="material-symbols-rounded">mic</span>
+          Voice Emergency Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Options Screen -->
+  <div id="screen-options" class="screen bg-gray">
+    <header class="app-header">
+      <div class="header-left">
+        <button id="btn-options-back" class="icon-btn mr-2">
+          <span class="material-symbols-rounded">arrow_back</span>
+        </button>
+        <div class="app-title">Choose Ambulance</div>
+      </div>
+    </header>
+
+    <div class="options-list-container" id="options-list">
+      <!-- dynamically filled -->
+    </div>
+
+    <!-- Blood Group Selection Removed (Moved to Login) -->
+
+    <div class="bottom-fixed">
+      <button id="btn-confirm-ride" class="btn primary-btn full-width">Book Ambulance</button>
+    </div>
+  </div>
+
+  <!-- Searching Screen -->
+  <div id="screen-searching" class="screen splash-bg center-flex">
+    <div class="search-card pulse-animation">
+      <div class="radar-spinner"></div>
+      <h2>Searching Captain</h2>
+      <p>Connecting to nearest ambulance...</p>
+    </div>
+  </div>
+
+  <!-- Tracking Screen -->
+  <div id="screen-tracking" class="screen">
+    <header class="app-header floating-header">
+      <div class="header-left">
+        <div class="header-text">
+          <div class="app-title">Live Tracking</div>
+          <div id="track-caption" class="app-subtitle status-badge">Connecting...</div>
+        </div>
+      </div>
+      <button id="btn-tracking-back" class="btn sm-btn">End Demo</button>
+    </header>
+
+    <div id="track-map" class="map-container full-height"></div>
+
+    <div class="bottom-sheet tracking-sheet">
+      <div class="sheet-handle"></div>
+
+      <div class="track-info-box">
+        <span class="material-symbols-rounded text-green info-icon">verified</span>
+        <div id="track-status" class="track-text">
+          Captain assigned. AI Green Corridor is being activated.
+        </div>
+      </div>
+
+      <div class="section-header">
+        <span>Signals on Corridor</span>
+        <span class="material-symbols-rounded">traffic</span>
+      </div>
+
+      <div id="signal-list" class="signal-scroller"></div>
+
+      <button id="btn-sos" class="btn danger-btn full-width icon-left mt-3">
+        <span class="material-symbols-rounded">sos</span>
+        SOS – Alert Hospital
+      </button>
+    </div>
+  </div>
+
+  <!-- Simple Profile Screen -->
+  <div id="screen-profile" class="screen bg-gray">
+    <header class="app-header">
+      <div class="header-left">
+        <button id="btn-profile-back" class="icon-btn mr-2">
+          <span class="material-symbols-rounded">arrow_back</span>
+        </button>
+        <div class="app-title">Profile</div>
+      </div>
+    </header>
+
+    <div class="profile-container fade-in-up">
+      <div class="profile-header-card">
+        <div class="profile-avatar">
+          <span class="material-symbols-rounded">person</span>
+        </div>
+        <h3>Medi-Route User</h3>
+        <p>Edit Profile</p>
+      </div>
+
+      <div class="profile-menu">
+        <div class="menu-item">
+          <span class="material-symbols-rounded menu-icon">payments</span>
+          <div class="menu-text">
+            <h4>Payment Methods</h4>
+            <p>Cash / UPI</p>
+          </div>
+          <span class="material-symbols-rounded arrow-right">chevron_right</span>
+        </div>
+        <div class="menu-item">
+          <span class="material-symbols-rounded menu-icon">history</span>
+          <div class="menu-text">
+            <h4>My Trips</h4>
+            <p>Previous emergency rides</p>
+          </div>
+          <span class="material-symbols-rounded arrow-right">chevron_right</span>
+        </div>
+        <div class="menu-item">
+          <span class="material-symbols-rounded menu-icon">settings</span>
+          <div class="menu-text">
+            <h4>Settings</h4>
+            <p>Notifications, Language</p>
+          </div>
+          <span class="material-symbols-rounded arrow-right">chevron_right</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>

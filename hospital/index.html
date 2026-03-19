@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Medi-Route | Hospital Dashboard</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols Standard -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Reusing Rider App Logo for consistency -->
+    <link rel="icon" type="image/png" href="../rider_app/images/logo.png" />
+</head>
+
+<body class="bg-light">
+
+    <!-- LOGIN SCREEN -->
+    <div id="screen-login" class="screen active center-flex">
+        <div class="login-card fade-in-up">
+            <div class="login-header">
+                <div class="icon-circle bg-green-light">
+                    <span class="material-symbols-rounded text-green">local_hospital</span>
+                </div>
+                <h2>Hospital Portal</h2>
+                <p>Login to view incoming emergency traffic</p>
+            </div>
+
+            <div class="field-group">
+                <label>Hospital Name</label>
+                <div class="input-wrapper">
+                    <span class="material-symbols-rounded input-icon">domain</span>
+                    <!-- Basic autocomplete for demo purposes -->
+                    <select id="hospital-name">
+                        <option value="" disabled selected>Loading hospitals...</option>
+                    </select>
+                    <span class="material-symbols-rounded arrow-icon">expand_more</span>
+                </div>
+            </div>
+
+            <button id="btn-login" class="btn primary-btn full-width">
+                Access Dashboard
+            </button>
+            <p style="text-align:center;margin-top:12px;color:#666;font-size:14px">New Hospital? <a href="#"
+                    id="link-signup">Register</a></p>
+            <p style="text-align:center;margin-top:12px;color:#666;font-size:14px">New Hospital? <a href="#"
+                    id="link-signup">Register</a></p>
+        </div>
+
+        <!-- SIGNUP MODAL -->
+        <div id="modal-signup" class="modal-overlay" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Register Hospital</h3>
+                    <button id="btn-close-signup" class="icon-btn-sm"><span
+                            class="material-symbols-rounded">close</span></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div class="field-group">
+                        <label>Hospital Name</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-rounded input-icon">domain</span>
+                            <input id="signup-name" type="text" placeholder="Official Hospital Name" />
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Address / Location</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-rounded input-icon">location_on</span>
+                            <input id="signup-address" type="text" placeholder="Area, City" />
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Contact Person</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-rounded input-icon">person</span>
+                            <input id="signup-contact" type="text" placeholder="Admin Name" />
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-rounded input-icon">lock</span>
+                            <input id="signup-password" type="password" placeholder="Create Password" />
+                        </div>
+                    </div>
+
+                    <button id="btn-signup" class="btn primary-btn full-width">Register Hospital</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="modal-signup" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Register Hospital</h3>
+                <button id="btn-close-signup" class="icon-btn-sm"><span
+                        class="material-symbols-rounded">close</span></button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                <div class="field-group">
+                    <label>Hospital Name</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-rounded input-icon">domain</span>
+                        <input id="signup-name" type="text" placeholder="Official Hospital Name" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Address / Location</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-rounded input-icon">location_on</span>
+                        <input id="signup-address" type="text" placeholder="Area, City" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Contact Person</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-rounded input-icon">person</span>
+                        <input id="signup-contact" type="text" placeholder="Admin Name" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-rounded input-icon">lock</span>
+                        <input id="signup-password" type="password" placeholder="Create Password" />
+                    </div>
+                </div>
+
+                <button id="btn-signup" class="btn primary-btn full-width">Register Hospital</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD SCREEN -->
+    <div id="screen-dashboard" class="screen">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="header-logo-container bg-green-light">
+                    <span class="material-symbols-rounded text-green">local_hospital</span>
+                </div>
+                <div class="header-text">
+                    <div class="app-title" id="display-hospital-name">Hospital</div>
+                    <div class="app-subtitle">Emergency Dashboard</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="status-badge bg-green-light text-green">
+                    <span class="pulse-dot"></span> Live
+                </span>
+                <button id="btn-logout" class="icon-btn ml-2">
+                    <span class="material-symbols-rounded">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <div class="section-header">
+                <h2>Incoming Ambulances</h2>
+                <span id="req-count" class="badge bg-gray text-white">0</span>
+            </div>
+
+            <div id="requests-list" class="requests-grid">
+                <!-- Requests will be injected here -->
+                <div class="empty-state">
+                    <div class="radar-spinner small"></div>
+                    <p>Waiting for emergency requests...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- TRACKING MODAL -->
+    <div id="modal-tracking" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Live Ambulance Tracking</h3>
+                <button id="btn-close-track" class="icon-btn-sm"><span
+                        class="material-symbols-rounded">close</span></button>
+            </div>
+            <div id="hospital-map" class="map-container"></div>
+            <div class="track-info">
+                <span id="track-status" class="status-badge st-accepted">En Route</span>
+                <span id="track-eta">ETA: Calculating...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Maps API -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCmb7BCrLFXsDQgLWhfYBPN2VQ9w0-V9o&libraries=places&callback=onGoogleMapsLoaded"
+        async defer>
+        </script>
+
+    <script src="js/hospital.js"></script>
+</body>
+
+</html>
